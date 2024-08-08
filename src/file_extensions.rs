@@ -1,4 +1,4 @@
-use std::{fs::{self, File}, io::Read};
+use std::{fs::{self, File}, io::{self, Read}};
 
 use serde::de::DeserializeOwned;
 
@@ -18,7 +18,8 @@ pub fn load_file<T: DeserializeOwned>(file_path: &str) -> Vec<T> {
     }
 }
 
-pub fn save_file(file_path: &str, data: String) {
-    fs::write(file_path, data).expect("Unable to write file");
+pub fn save_file(file_path: &str, data: String) -> Result<(), io::Error> {
+    fs::write(file_path, data)?;
     println!("File saved successfully!");
+    Ok(())
 }
